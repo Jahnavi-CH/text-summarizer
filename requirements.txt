@@ -7,3 +7,5 @@ nltk
 pyyaml
 accelerate
 sentencepiece
+
+streamlit
