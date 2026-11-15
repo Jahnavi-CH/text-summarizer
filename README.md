@@ -18,14 +18,14 @@ text-summarizer/
 ├── main.py                      # Single CLI entrypoint for prep, train, eval, and infer stages
 └── requirements.txt             # Reproducible Python dependencies
 
-1. Setup Environment
+### 1. Setup Environment
 
 python -m venv venv
 # Windows PowerShell:
 .\venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 
-2. Run Pipeline Stages
+### 2. Run Pipeline Stages
 
 # 1. Clean text with NLTK and tokenize dataset splits
 python main.py prep
@@ -39,7 +39,7 @@ python main.py eval
 # 4. Run inference on sample unseen text
 python main.py infer
 
-Evaluation Results (SAMSum Test Split — 200 Samples)
+## Evaluation Results (SAMSum Test Split — 200 Samples)
 Fine-tuned facebook/bart-base for 2 epochs (max_input_length=512, max_target_length=128, num_beams=4, length_penalty=1.0)
 
 Metric,Score
@@ -48,7 +48,7 @@ ROUGE-2,19.57
 ROUGE-L,35.64
 ROUGE-Lsum,35.63
 
-Error Analysis & Future Improvements
+## Error Analysis & Future Improvements
 Qualitative Finding: While the model captures key entities and main intent fluently, multi-turn dialogues with 3+ speakers occasionally exhibit speaker-attribution confusion (merging actions across speakers).
 
 Next Steps: Scale training to the full 14.7k SAMSum training split, experiment with facebook/bart-large-cnn, and wrap SummarizerPipeline in a FastAPI endpoint for real-time serving.
