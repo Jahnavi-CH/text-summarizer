@@ -15,6 +15,12 @@ def clean_text_with_nltk(text: str) -> str:
     """Normalizes whitespace and cleans sentence boundaries using NLTK."""
     if not text:
         return ""
+    try:
+        nltk.data.find("tokenizers/punkt_tab")
+    except LookupError:
+        nltk.download("punkt_tab", quiet=True)
+        nltk.download("punkt", quiet=True)
+
     # Normalize irregular whitespace and newlines
     text = re.sub(r"\s+", " ", text).strip()
     sentences = nltk.sent_tokenize(text)
