@@ -16,22 +16,19 @@ def clean_text_with_nltk(text: str) -> str:
     if not text:
         return ""
 
-    nltk_data_dir = "/tmp/nltk_data"
-    if nltk_data_dir not in nltk.data.path:
-        nltk.data.path.insert(0, nltk_data_dir)
-
-    try:
-        nltk.data.find("tokenizers/punkt_tab")
-    except LookupError:
-        os.makedirs(nltk_data_dir, exist_ok=True)
-        nltk.download("punkt_tab", download_dir=nltk_data_dir, quiet=True)
-        nltk.download("punkt", download_dir=nltk_data_dir, quiet=True)
+    # Point NLTK directly to the bundled nltk_data folder inside the repository
+    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+    bundled_nltk_dir = os.path.join(repo_root, "nltk_data")
+    if bundled_nltk_dir not in nltk.data.path:
+        nltk.data.path.insert(0, bundled_nltk_dir)
 
     # Normalize irregular whitespace and newlines
     text = re.sub(r"\s+", " ", text).strip()
-    sentences = nltk.sent_tokenize(text)
-    return " ".join(sentences)
-
+    try:
+        sentences = nltk.sent_tokenize(text)
+        return " ".join(sentences)
+    except LookupError:
+        return text
 
 class DataPreprocessor:
     def __init__(self, config: dict):
