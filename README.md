@@ -1,3 +1,6 @@
+https://jahnavi-text-summarizer.streamlit.app/
+
+
 # End-to-End Abstractive Text Summarization (BART + PyTorch + Hugging Face)
 
 An end-to-end NLP text summarization pipeline built with Python, PyTorch, Hugging Face Transformers, and NLTK. The system preprocesses conversational text, fine-tunes a sequence-to-sequence `facebook/bart-base` model on the SAMSum dataset, evaluates summary quality using ROUGE metrics, and exposes a reusable inference pipeline for unseen text.
